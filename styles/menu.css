@@ -1,0 +1,131 @@
+.menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  width: 100%;
+  height: 80px;
+  backdrop-filter: blur(4px);
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0 10px;
+  z-index: 1;
+  transition: background 0.7s ease;
+  background: linear-gradient(to bottom,rgba(124, 154, 98, 0.8),rgba(246, 226, 179, 0.6) );
+}
+.totoroMenu{ display: inline-block; width: 100%; }
+.Logo {
+  display: flex;
+  align-items: center;
+  width: 50px;
+  margin: 10px;
+  height: 80%;
+  backdrop-filter: blur(1px);
+  background: whitesmoke;
+  border-radius: 15%;
+}
+
+.navMenu {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+  justify-items: flex-end;
+}
+
+.linkMenu > a {
+  display: inline-block;
+  padding: 10px 10px;
+  text-decoration: none;
+  color: rgb(0, 0, 0);
+  font-family: 'Patrick Hand', 'Comic Neue', cursive;
+  font-size: 1rem;
+  background: whitesmoke;
+  border-radius: 15%;
+}
+.linkMenu > a:hover {
+  border-radius: 15%;
+  border: 3px solid black;
+}
+
+.linkMenu {
+  list-style-type: none;
+  padding-top: 15px;
+  overflow-x: hidden;
+
+}
+
+/* Scroll margin */
+#Problema, #Objetivos, #Desafio, #SP {
+  scroll-margin-top: 80px;
+}
+.toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 60px;
+  height: 30px;
+  border-radius: 30px;
+  background: #ddd;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  transition: background 0.5s ease;
+}
+
+.circle {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #c5a412;
+  margin-left: 2px;
+  transition: transform 0.5s ease, background 0.5s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
+
+.circle::after {
+  content: '☀️';
+}
+
+/* Activado (modo noche) */
+.toggle.active {
+  background: rgb(54, 54, 54);
+}
+
+.toggle.active .circle {
+  background: rgb(116, 70, 243);
+  animation: rodarLuna 1s forwards;
+}
+
+.toggle.active .circle::after {
+  content: '🌙';
+}
+
+/* Animaciones */
+@keyframes rodarLuna {
+  0% {
+    transform: translateX(0) rotate(0deg);
+  }
+  100% {
+    transform: translateX(30px) rotate(360deg);
+  }
+}
+
+@keyframes rodarSol {
+  0% {
+    transform: translateX(30px) rotate(0deg);
+  }
+  100% {
+    transform: translateX(0) rotate(-360deg);
+  }
+}
+
+/* Cuando se desactiva */
+.toggle:not(.active) .circle {
+  animation: rodarSol 1s forwards;
+}

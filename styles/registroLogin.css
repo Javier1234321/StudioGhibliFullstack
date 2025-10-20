@@ -1,0 +1,30 @@
+*{
+    margin: 0;
+    scroll-behavior: smooth !important;
+}
+.fondo{
+
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  width: 100%;  
+  background-image: url('/fondoGhibli.png');
+  background-size: 100% 100%;       /* estira imagen en ancho y alto */
+  background-position: top center;
+  background-repeat: no-repeat;
+  display: flex;                   /* activa flexbox */
+  justify-content: center;         /* centra horizontalmente */
+  align-items: center;  
+  position: relative; 
+   transition: background-image 0.7s ease, background-position 0.7s ease, background-size 0.7s ease;
+}
+.fondo::before{
+     content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, rgba(78,137,199,0.8), rgba(127,179,226,0.6), rgba(167,199,231,0.5));
+      z-index: -1;
+}
