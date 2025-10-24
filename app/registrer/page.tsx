@@ -10,7 +10,7 @@ interface FormData {
   password: string;
   fechaNacimiento: string;
 }
-export const page=() => {
+export const Page=() => {
     const [formData, setFormData] = useState<FormData>({
         nombres: '',
         apellidos: '',
@@ -46,7 +46,7 @@ export const page=() => {
       };
 
       console.log('Enviando datos:');
-        const response = await fetch('./api/auth/registrer/', { 
+        const response = await fetch('api/auth/registrer', { 
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -134,4 +134,4 @@ export const page=() => {
     );
 };
 
-export default page;
+export default Page;
