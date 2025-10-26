@@ -46,7 +46,7 @@ export const Page=() => {
       };
 
       console.log('Enviando datos:');
-        const response = await fetch('api/auth/registrer', { 
+        const response = await fetch('api/registrer', { 
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

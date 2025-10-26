@@ -20,7 +20,7 @@ export default function EliminarCuentaPage() {
     setLoading(true);
 
     try {
-      const response = await fetch("/api/users/eliminar_cuenta", {
+      const response = await fetch("/api/eliminar_cuenta", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),

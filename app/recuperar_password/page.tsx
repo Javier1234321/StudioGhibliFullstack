@@ -13,7 +13,7 @@ export default function RecuperarPassword() {
     setMessage('');
 
     try {
-      const response = await fetch('/api/users/recuperar_password', {
+      const response = await fetch('/api/recuperar_password', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password_hash: nuevaPassword }),
