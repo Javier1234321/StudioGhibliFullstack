@@ -20,24 +20,28 @@ export async function POST(req: Request) {
 
     if (error || !user) {
       return NextResponse.json(
-        { ok: false, error: "El usuario no existe" , status: 404 },        
+        { ok: false, error: "El usuario no existe" },
+        { status: 404 }
       );
     }
 
     if (password_hash !== user.password_hash) {
       return NextResponse.json(
-        { ok: false, error: "Contraseña incorrecta" ,status: 401},
+        { ok: false, error: "Contraseña incorrecta" },
+        { status: 401 }
       );
     }
 
     return NextResponse.json(
-      { ok: true, message: "Inicio de sesión exitoso",  status: 200 },
+      { ok: true, message: "Inicio de sesión exitoso" },
+      { status: 200 }
     );
 
   } catch (err) {
     console.error("Error en login:", err);
     return NextResponse.json(
-      { ok: false, error: "Error interno del servidor" ,  status: 500 },
+      { ok: false, error: "Error interno del servidor" },
+      { status: 500 }
     );
   }
 }
