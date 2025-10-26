@@ -33,7 +33,7 @@ export default function ActualizarDatosPage() {
     setMessage("");
 
     try {
-      const response = await fetch("/api/users/actualizar_datos", {
+      const response = await fetch("/api/actualizar_datos", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
