@@ -103,6 +103,7 @@ export const Page = () => {
             {message && <div>{message}</div>}
             <div className="form_group">
               <input
+                id='nombres'
                 type="text"
                 placeholder=" "
                 name="nombres"
@@ -114,6 +115,7 @@ export const Page = () => {
             </div>
             <div className="form_group">
               <input
+                id='nombres'
                 type="password"
                 placeholder=" "
                 name="password_hash"
