@@ -109,12 +109,12 @@ export const Page= () => {
                     <input type="password" placeholder=' ' name='password_hash' className='input'  required value={formData.password_hash} onChange={handleChange}/>
                     <label htmlFor="password_hash" className="label">Contraseña</label>
                 </div>
-               
+               <button type='submit' className="boton" disabled={loading}>{loading ? 'Registrando...':'Enviar'}</button>
             </form>
                  <button className='boton' onClick={irARecuperarPassword}>Recuperar password</button>
                 <button className='boton' onClick={actualizarDatos}>Actualizar datos</button>
                 <button className='boton' onClick={eliminarCuenta}>Eliminar Cuenta</button>
-                <button type='submit' className="boton" disabled={loading}>{loading ? 'Registrando...':'Enviar'}</button>
+                
             </section>
         </div>
         </div>
