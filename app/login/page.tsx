@@ -115,7 +115,7 @@ export const Page = () => {
             </div>
             <div className="form_group">
               <input
-                id='nombres'
+                id='password_hash'
                 type="password"
                 placeholder=" "
                 name="password_hash"
