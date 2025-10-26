@@ -1,10 +1,12 @@
+// app/layout.tsx
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+
 import "../styles/home.css";
 import "../styles/menu.css";
 import "../styles/carta.css";
 import "../styles/registroLogin.css";
-import "../styles/formulario.css";    
+import "../styles/formulario.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -23,14 +25,15 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+    <html lang="es">
+      <head>
+        <script src="/js/darkmode.js" defer></script>
+      </head>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         {children}
       </body>
     </html>

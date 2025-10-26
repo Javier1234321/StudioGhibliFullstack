@@ -55,19 +55,22 @@ export const Page=() => {
       });
       const result=await response.json();
       console.log('Servidor: ',result)
-      if (response.ok) {
-            setMessage('Registro exitoso');
-            setFormData({
-                nombres: '',
-                apellidos: '',
-                correo: '',
-                telefono: '',
-                password: '',
-                fechaNacimiento: ''
-            });
-        } else {
-            setMessage(`${result.error}`);
-        }
+    if (response.ok) {
+        setMessage('🎉 Registro exitoso');
+    } else if (response.status === 400) {
+        setMessage('⚠️ Faltan datos en el formulario');
+    } else if (response.status === 409) {
+        setMessage('❌ Este correo ya está registrado');
+    } else if (response.status === 500) {
+        setMessage('💥 Error del servidor, intenta más tarde');
+    
+    }else if(response.status===408){
+        setMessage('Este numero de telefono ya esta registrado');
+    } 
+    else {
+        setMessage('Ocurrió un error inesperado');
+    }
+
 
     } catch (error) {
       console.error('Error:', error);
@@ -100,6 +103,11 @@ export const Page=() => {
         <div className="fondo">
             <section className="formulario">
                 <h2>Registro</h2>
+                {message && (
+                    <div>
+                        {message}
+                    </div>
+                )}
                 <form onSubmit={handleSubmit}>
                 <div className="form_group">
                     <input type="text" className="input" placeholder=" " required name='nombres' value={formData.nombres} onChange={handleChange}/>

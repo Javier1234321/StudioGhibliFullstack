@@ -1,6 +1,66 @@
-import React from "react";
+"use client"
+import React, { useEffect } from "react";
 
-export default function Home(){
+export default function Home() {
+  useEffect(() => {
+    const fondo = document.querySelector('.fondo') as HTMLElement;
+    const menu = document.querySelector('.menu') as HTMLElement;
+    const btn = document.getElementById('cambio_tema');
+    const linkMenus = document.querySelectorAll('.linkMenu > a');
+    const carta = document.querySelectorAll('.carta');
+    const logo = document.querySelector('.Logo') as HTMLElement;
+    let bandera = true;
+
+    if (!btn) return;
+
+    const cambio = () => {
+      if (!fondo || !menu || !logo) return;
+      if (bandera) {
+        fondo.style.backgroundImage = "url('/fondoGhibli.png'), linear-gradient(to bottom, #0B1D3A, #1E3A5F, #2E4A7D, #6B5B95)";
+        fondo.style.backgroundSize = "cover";
+        fondo.style.backgroundRepeat = "no-repeat";
+        fondo.style.backgroundPosition = "center";
+        menu.style.background="linear-gradient(to bottom, #0B1D3A, #1E3A5F, #2E4A7D, #6B5B95)";
+        logo.style.background="linear-gradient(to bottom, #0B1D3A, #1E3A5F, #2E4A7D, #6B5B95)";
+        linkMenus.forEach(link => {
+          (link as HTMLElement).style.background = "black";
+          (link as HTMLElement).style.color = "#e9e4e4ff";
+        });
+        carta.forEach(link => {
+          (link as HTMLElement).style.background = "rgba(108, 122, 137)";
+          (link as HTMLElement).style.color = "#e6e6f0";
+          (link as HTMLElement).style.border="3px solid rgba(255, 230, 200, 0.1)";
+        });
+        bandera = false;
+      } else {
+        fondo.style.backgroundImage = '';
+        fondo.style.backgroundSize = '';
+        fondo.style.backgroundRepeat = '';
+        fondo.style.backgroundPosition = '';
+        logo.style.background='';
+        menu.style.background = '';
+        linkMenus.forEach(link => {
+          (link as HTMLElement).style.background = '';
+          (link as HTMLElement).style.color = '';
+        });
+        carta.forEach(link => {
+          (link as HTMLElement).style.background = "";
+          (link as HTMLElement).style.color = "";
+          (link as HTMLElement).style.border="";
+        });
+        bandera = true;
+      }
+    };
+
+    btn.addEventListener('click', () => {
+      btn.classList.toggle('active');
+      cambio();
+    });
+
+    return () => {
+      btn.removeEventListener('click', cambio);
+    };
+  }, []);
   return(
     <div>
         <div className="menu">

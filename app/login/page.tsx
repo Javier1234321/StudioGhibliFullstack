@@ -1,7 +1,74 @@
-import React from 'react';
+'use client';
+import React,{useState} from 'react';
+import { useRouter } from 'next/navigation';
+interface FormData {
+  nombres: string;
+  password_hash: string;
+}
+export const Page= () => {
+     const router = useRouter();
 
-
-export const page= () => {
+    const irARecuperarPassword = () => {
+        router.push('/recuperar_password'); 
+    };  
+    const actualizarDatos = () => {
+        router.push('/actualizar_datos'); 
+    };  
+    
+    const eliminarCuenta = () => {
+        router.push('/eliminar_cuenta'); 
+    };  
+    
+    const [formData, setFormData] = useState<FormData>({
+            nombres: '',
+            password_hash: ''
+        });
+        const [loading, setLoading] = useState(false);
+        const [message, setMessage] = useState('');
+        
+        const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target;
+        setFormData(prev => ({
+          ...prev,
+          [name]: value
+        }));
+        };
+    
+        const handleSubmit = async (e: React.FormEvent) => {
+            e.preventDefault();
+            setLoading(true);
+            setMessage('');
+            
+        try {
+            const dataToSend = {
+                names: formData.nombres,
+                password_hash: formData.password_hash 
+          };
+    
+          console.log('Enviando datos:');
+            const response = await fetch('/api/auth/login', { 
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(dataToSend)
+          });
+          const result=await response.json();
+          console.log('Servidor: ',result)
+          if (response.ok) {
+                setMessage('Login exitoso');
+            } else {
+                setMessage(`${result.error}`);
+            }
+    
+        } catch (error) {
+          console.error('Error:', error);
+          setMessage('Error de conexión');
+        } finally {
+          setLoading(false);
+        }
+        
+      };
     return (
         <div>
             <div className="menu">
@@ -25,25 +92,33 @@ export const page= () => {
     <div className="fondo">
         <section className="formulario">
             <h2>Login</h2>
-            <form action="">
+            <form onSubmit={handleSubmit}>
                 <select className="gif">
                     <option></option>
                 </select>
+                 {message && (
+                    <div>
+                        {message}
+                    </div>
+                )}
                 <div className="form_group">
-                    <input type="text" placeholder=' ' name='user' className='input' />
-                    <label htmlFor="user" className='label'>Usuario</label>
+                    <input type="text" placeholder=' ' name='nombres' className='input' value={formData.nombres} onChange={handleChange}/>
+                    <label htmlFor="nombres" className='label'>Nombre</label>
                 </div>
                 <div className="form_group">
-                    <input type="password" placeholder=' ' name='password' className='input' />
-                    <label htmlFor="password" className="label">Contraseña</label>
+                    <input type="password" placeholder=' ' name='password_hash' className='input'  required value={formData.password_hash} onChange={handleChange}/>
+                    <label htmlFor="password_hash" className="label">Contraseña</label>
                 </div>
-                <button className="boton">Enviar</button>
+               
             </form>
-                <button className='boton'>Recuperar password</button>
+                 <button className='boton' onClick={irARecuperarPassword}>Recuperar password</button>
+                <button className='boton' onClick={actualizarDatos}>Actualizar datos</button>
+                <button className='boton' onClick={eliminarCuenta}>Eliminar Cuenta</button>
+                <button type='submit' className="boton" disabled={loading}>{loading ? 'Registrando...':'Enviar'}</button>
             </section>
         </div>
         </div>
     );
 };
 
-export default page;
+export default Page;
